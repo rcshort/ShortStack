@@ -22,7 +22,6 @@ rankingC = pygame.image.load('ranking_click.png')
 level = pygame.image.load('levels.png')
 levelC = pygame.image.load('levels_click.png')
 menuP = pygame.image.load('mainmenu.png')
-backgroundI = pygame.image.load('background.jpg')
 queue = pygame.image.load('bar.png')
 screen = pygame.display.set_mode((screenW, screenH))
 
@@ -62,7 +61,9 @@ def startMenu():
             levelOne()
             
 def levelOne():
-    screen.blit(backgroundI,(50, 25))
+    backgroundI = pygame.image.load('background.jpg')
+    backgroundI = pygame.transform.scale(backgroundI,(888,500))
+    screen.blit(backgroundI,(0, 0))
     #screen.blit(queue, (0,0))
     mat = Mat()
     mat.draw(screen)
@@ -80,7 +81,10 @@ def main():
 class Mat():
     def __init__(self):
         self.img = pygame.image.load('mat.png.')
-        self.pos = [300,300]
+        self.pos = [350,375]
+        self.baseY = 375+62
+        self.minX = 350
+        self.maxX = 350+326
     def draw(self, screen):
         screen.blit(self.img, self.pos)
 
