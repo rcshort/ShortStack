@@ -71,7 +71,12 @@ def levelOne():
     blender = pygame.image.load('blender.png')
     pot = pygame.image.load('top_pot.png')
     microwave = pygame.image.load('microwave.png')
-    
+    Glass = RectObject()
+    Blender = RectObject()
+    Pot = RectObject()
+    Microwave = RectObject()
+    objectList = [Glass, Blender, Pot, Microwave]
+    i = 0
     while(1):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
