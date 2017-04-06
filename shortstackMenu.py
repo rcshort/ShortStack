@@ -100,33 +100,58 @@ class RectObject():
         self.img = pygame.image.load('display.png')
         self.pos = [0,0]
         self.image_size = self.img.size
-        self.width = image_size[0]
-        self.height = image_size[1]
+        self.width = self.image_size[0]
+        self.height = self.image_size[1]
         self.upperY = 0
-        self.lowerY = 0+heigth
+        self.lowerY = 0+self.height
         self.leftX = 0
-        self.midLeftX = 0+width/3
-        self.midRightX = 0+2*width/3
-        self.rightX = 0+width
+        self.midX = self.width/2
+        self.midLeftX = 0+self.width/3
+        self.midRightX = 0+2*self.width/3
+        self.rightX = 0+self.width
     def loadImg(self, IMG):
         self.img = pygame.image.load(IMG)
         self.image_size = self.img.size
-        self.width = image_size[0]
-        self.height = image_size[1]
+        self.width = self.image_size[0]
+        self.height = self.image_size[1]
     def setPos(self, pos):
         self.pos = pos
         self.upperY = pos[1]
-        self.lowerY = pos[1]+height
+        self.lowerY = pos[1]+self.height
         self.leftX = pos[0]
-        self.midLeftX = pos[0]+width/3
-        self.midRightX = pos[0]+2*width/3
-        self.rightX = pos[0]+width
-    def update(self, counter):
-        if(self.selected == 0 and self.placed == 0)
-            if()
-        elif(self.selected == 1 and self.placed == 0)
-            
-        elif(self.selected == 0 and self.placed == 1)
+        self.midLeftX = pos[0]+self.width/3
+        self.midRightX = pos[0]+2*self.width/3
+        self.rightX = pos[0]+self.width
+        self.midX = pos[0]+self.width/2
+    #def update(self, counter):
+
+        #if(self.lowerY <= Mat.self.baseY):
+        #    if(self.leftX < Mat.rightX and self.leftX > Mat.leftX):
+        #        if(self.midX < Mat.rightX):
+        #            #position declines up until this point, here it stops
+        #    
+        #    elif(self.rightX < Mat.rightX and self.rightX > Mat.leftX):
+        #        if(self.midX > Mat.leftX):
+        #            //position declines up until this point, here it stops
+        #    
+        #    elif(Mat.leftX < self.rightX and Mat.leftX > self.leftX):
+        #        if(self.midX > Mat.leftX):
+        #            //position declines up until this point, here it stops
+        #    
+        #    elif(Mat.rightX < self.rightX and Mat.rightX > self.leftX):
+        #        if(self.midX < self.rightX):
+        #            //position declines up until this point, here it stops
+        #    
+        #    
+        #
+        #
+        #
+        #if(self.selected == 0 and self.placed == 0):
+        #    if(self.pos[0] > 120)
+        #        
+        #elif(self.selected == 1 and self.placed == 0):
+        #    
+        #elif(self.selected == 0 and self.placed == 1):
 
 
             
