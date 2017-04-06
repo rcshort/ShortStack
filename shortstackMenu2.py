@@ -12,8 +12,6 @@ red = (255, 0, 0)
 pygame.init()
 screenH = 500
 screenW = 888
-picH = 800
-picV = 800
 startL = 274
 startH = 56
 newgame = pygame.image.load('newgame.png')
@@ -24,7 +22,6 @@ level = pygame.image.load('levels.png')
 levelC = pygame.image.load('levels_click.png')
 menuP = pygame.image.load('mainmenu.png')
 queue = pygame.image.load('bar.png')
-backgroundI = pygame.image.load('background_w_bar.jpg')
 screen = pygame.display.set_mode((screenW, screenH))
 
 
@@ -69,44 +66,104 @@ def levelOne():
     backgroundI = pygame.transform.scale(backgroundI, (888, 500))
     screen.blit(backgroundI, (0, 0))
     # screen.blit(queue, (0,0))
-    sqX = 40
-    sqY = 30
+    sqX = 5
+    sqY = 400
+    sqX2 = 20
+    sqY2 = 275
     mat = Mat()
     mat.draw(screen)
     glass = pygame.image.load('glass.png')
     blender = pygame.image.load('blender.png')
     pot = pygame.image.load('top_pot.png')
     microwave = pygame.image.load('microwave.png')
-
+    microX = 110
+    microY = 72
+    blX = 80
+    blY = 100
+    gX = 75
+    gY = 100
+    count = 0;
+    screen.blit(microwave, (sqX,sqY))
+    screen.blit(glass, (sqX2, sqY2))
     while (1):
         mx, my = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
-            if event.type == pygame.MOUSEBUTTONDOWN and (mx > sqX and mx < sqX + startL) and (
-                    my > sqY and my < sqY + startH):
-                mouseMov(mx,my)
+            if event.type == pygame.MOUSEBUTTONDOWN and (mx > sqX and mx < sqX + microX) and (
+                    my > sqY and my < sqY + microY and count == 0):
+                sqX = mouseMov(mx,my,microX,microY,microwave, backgroundI,mat,glass, sqX2, sqY2)
+                count = count + 1
+                sqX2 = 20
+                sqY2 = 350
+                sqY = 359
 
+            elif event.type == pygame.MOUSEBUTTONDOWN and (mx > sqX2 and mx < sqX2 + gX) and (
+                    my > sqY2 and my < sqY2 + gY and count != 0):
+                mouseMov2(mx,my,sqX,sqY,microwave, backgroundI,mat,glass, sqX2, sqY2)
+                print("I got here")
         pygame.display.update()
 
-def mouseMov(mx, my):
+def mouseMov(mx, my,sqX,sqY,pic, back,mat,nextItem, sqx2,sqy2):
     held = True
     while (held):
         for event in pygame.event.get():
             if (event.type == pygame.MOUSEBUTTONUP):
                 held = False
             mx, my = pygame.mouse.get_pos()
-            sqX = mx
+            sqX= mx
             sqY = my
-            screen.blit(backgroundI, (0, 0))
-            screen.blit(newgame, (sqX, sqY))
+            screen.blit(back,(0,0))
+            mat.draw(screen)
+            screen.blit(nextItem, (sqx2, sqy2))
+            screen.blit(pic, (sqX, sqY))
             pygame.display.update()
             if (held == False):
+                print(my)
+                if(sqY < mat.baseY):
+                    while(my < 359):
+                        my = my + 1
+                    screen.blit(back, (0, 0))
+                    print(my)
+                    sqY= my
+                    sqx2 = 20
+                    sqy2 = 350
+                    mat.draw(screen)
+                    screen.blit(nextItem, (sqx2, sqy2))
+                    screen.blit(pic, (sqX, sqY))
+                    pygame.display.update()
+                break
+    return sqX
+
+def mouseMov2(mx, my,sqX,sqY,pic, back,mat,nextItem, sqx2,sqy2):
+    held = True
+    while (held):
+        for event in pygame.event.get():
+            if (event.type == pygame.MOUSEBUTTONUP):
+                held = False
+            mx, my = pygame.mouse.get_pos()
+            sqx2 = mx
+            sqy2 = my
+            screen.blit(back,(0,0))
+            mat.draw(screen)
+            screen.blit(nextItem, (sqx2, sqy2))
+            screen.blit(pic, (sqX, sqY))
+            pygame.display.update()
+            if (held == False):
+                print(my)
+                if(sqy2 < mat.baseY):
+                    while(my < 359-101):
+                        my = my + 1
+                    screen.blit(back, (0, 0))
+                    print(my)
+                    sqy2 = my
+                    mat.draw(screen)
+                    screen.blit(nextItem, (sqx2, sqy2))
+                    screen.blit(pic, (sqX, sqY))
+                    pygame.display.update()
                 break
     return
-
-
 
 def main():
     startMenu()
@@ -116,7 +173,7 @@ class Mat():
     def __init__(self):
         self.img = pygame.image.load('mat.png.')
         self.pos = [350, 375]
-        self.baseY = 375 + 62
+        self.baseY = 375 - 62
         self.minX = 350
         self.maxX = 350 + 326
 
