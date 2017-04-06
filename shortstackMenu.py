@@ -61,12 +61,17 @@ def startMenu():
             levelOne()
             
 def levelOne():
-    backgroundI = pygame.image.load('background.jpg')
+    backgroundI = pygame.image.load('background_w_bar.jpg')
     backgroundI = pygame.transform.scale(backgroundI,(888,500))
     screen.blit(backgroundI,(0, 0))
     #screen.blit(queue, (0,0))
     mat = Mat()
     mat.draw(screen)
+    glass = pygame.image.load('glass.png')
+    blender = pygame.image.load('blender.png')
+    pot = pygame.image.load('top_pot.png')
+    microwave = pygame.image.load('microwave.png')
+    
     while(1):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -88,6 +93,43 @@ class Mat():
     def draw(self, screen):
         screen.blit(self.img, self.pos)
 
+class RectObject():
+    def __init__(self):
+        self.selected = 0
+        self.placed = 0
+        self.img = pygame.image.load('display.png')
+        self.pos = [0,0]
+        self.image_size = self.img.size
+        self.width = image_size[0]
+        self.height = image_size[1]
+        self.upperY = 0
+        self.lowerY = 0+heigth
+        self.leftX = 0
+        self.midLeftX = 0+width/3
+        self.midRightX = 0+2*width/3
+        self.rightX = 0+width
+    def loadImg(self, IMG):
+        self.img = pygame.image.load(IMG)
+        self.image_size = self.img.size
+        self.width = image_size[0]
+        self.height = image_size[1]
+    def setPos(self, pos):
+        self.pos = pos
+        self.upperY = pos[1]
+        self.lowerY = pos[1]+height
+        self.leftX = pos[0]
+        self.midLeftX = pos[0]+width/3
+        self.midRightX = pos[0]+2*width/3
+        self.rightX = pos[0]+width
+    def update(self, counter):
+        if(self.selected == 0 and self.placed == 0)
+            if()
+        elif(self.selected == 1 and self.placed == 0)
+            
+        elif(self.selected == 0 and self.placed == 1)
+
+
+            
 if __name__ == "__main__":
     main()
 
