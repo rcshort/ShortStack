@@ -69,6 +69,8 @@ def levelOne():
     backgroundI = pygame.transform.scale(backgroundI, (888, 500))
     screen.blit(backgroundI, (0, 0))
     # screen.blit(queue, (0,0))
+    sqX = 40
+    sqY = 30
     mat = Mat()
     mat.draw(screen)
     glass = pygame.image.load('glass.png')
@@ -77,30 +79,18 @@ def levelOne():
     microwave = pygame.image.load('microwave.png')
 
     while (1):
+        mx, my = pygame.mouse.get_pos()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 quit()
             if event.type == pygame.MOUSEBUTTONDOWN and (mx > sqX and mx < sqX + startL) and (
                     my > sqY and my < sqY + startH):
-                print(mx)
-                print(my)
-                held = True
-                while (held):
-                    for event in pygame.event.get():
-                        if (event.type == pygame.MOUSEBUTTONUP):
-                            held = False
-                        mx, my = pygame.mouse.get_pos()
-                        sqX = mx
-                        sqY = my
-                        screen.blit(backgroundI, (0, 0))
-                        screen.blit(newgame, (sqX, sqY))
-                        pygame.display.update()
-                        if (held == False):
-                            break
+                mouseMov(mx,my)
+
         pygame.display.update()
 
-def mouseMov():
+def mouseMov(mx, my):
     held = True
     while (held):
         for event in pygame.event.get():
@@ -114,6 +104,7 @@ def mouseMov():
             pygame.display.update()
             if (held == False):
                 break
+    return
 
 
 
@@ -164,12 +155,12 @@ class RectObject():
         self.midRightX = pos[0] + 2 * self.width / 3
         self.rightX = pos[0] + self.width
 
-    def update(self, counter):
-        if (self.selected == 0 and self.placed == 0)
-            if ()
-        elif (self.selected == 1 and self.placed == 0)
-
-        elif (self.selected == 0 and self.placed == 1)
+   # def update(self, counter):
+    #    if (self.selected == 0 and self.placed == 0)
+     #       if ()
+      #  elif (self.selected == 1 and self.placed == 0)
+#
+ #       elif (self.selected == 0 and self.placed == 1)
 
 
 if __name__ == "__main__":
