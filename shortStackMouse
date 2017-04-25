@@ -1,0 +1,84 @@
+#NewGlobals
+playX = [0, 0, 0]
+playY = [0,0,0]
+
+def printPlayObjects():
+    countN = count
+    if(count >0):
+        countN = count - 1
+    for x in range(0, countN):
+        screen.blit(objectS[x], (playX[x], playY[x]))
+    pygame.display.update()
+    #NewInLevel
+                if event.type == pygame.MOUSEBUTTONDOWN and count == 0 and (mx > storeX[count] and mx < storeX[count] + objectL[count]) and (
+                            my > storeY[count] and my < storeY[count] + objectH[count]):
+                count = count + 1
+                Move = mouseMov(count -1,mat, backgroundI)
+                if(Move == False):
+                    count = count - 1
+                    screen.blit(backgroundI, (0, 0))
+                    mat.draw(screen)
+                    printObjects()
+                    printPlayObjects()
+                    pygame.display.update()
+            elif event.type == pygame.MOUSEBUTTONDOWN and count == 1 and (mx > storeX[count] and mx < storeX[count] + objectL[count]) and (
+                            my > storeY[count] and my < storeY[count] + objectH[count]):
+                count = count + 1
+                Move = mouseMov(count - 1, mat, backgroundI)
+                if (Move == False):
+                    count = count - 1
+                    screen.blit(backgroundI, (0, 0))
+                    mat.draw(screen)
+                    printObjects()
+                    printPlayObjects()
+                    pygame.display.update()
+            elif event.type == pygame.MOUSEBUTTONDOWN and count == 2 and (mx > storeX[count] and mx < storeX[count] + objectL[count]) and (
+                            my > storeY[count] and my < storeY[count] + objectH[count]):
+                count = count + 1
+                Move = mouseMov(count - 1, mat, backgroundI)
+                if (Move == False):
+                    count = count - 1
+                    screen.blit(backgroundI, (0, 0))
+                    mat.draw(screen)
+                    printObjects()
+                    printPlayObjects()
+                    pygame.display.update()
+                    
+ #NewInMouseMove
+ def mouseMov(current, mat,back):
+    held = True
+    while (held):
+        for event in pygame.event.get():
+            if (event.type == pygame.MOUSEBUTTONUP):
+                held = False
+            mx, my = pygame.mouse.get_pos()
+            sqX= mx
+            sqY = my
+            screen.blit(back, (0, 0))
+            mat.draw(screen)
+            screen.blit(objectS[current], (sqX, sqY))
+            printObjects()
+            if(current != 0):
+                printPlayObjects()
+            pygame.display.update()
+            if (held == False):
+                print(my)
+                #if(current == 0):
+                if(sqY < mat.minX and sqX >mat.minX and sqX < mat.maxX):
+                    while(my < mat.minX):
+                        my = my + 1
+                        sqY= my
+                    screen.blit(back, (0, 0))
+                    for x in range(count, StoreC):
+                        storeY[x] = storeY[x] + 125
+                    mat.draw(screen)
+                    playX[current] = sqX
+                    playY[current] = sqY
+                    printObjects()
+                    printPlayObjects()
+                    screen.blit(objectS[current], (sqX, sqY))
+                    pygame.display.update()
+                    return True
+                else:
+                    return False
+                break
