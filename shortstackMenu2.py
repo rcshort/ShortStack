@@ -45,7 +45,6 @@ file = "calming.wav"
 pygame.mixer.music.load(file)
 pygame.mixer.music.play(-1)
 
-
 def startMenu():
     intro = True
     print("HERERERE")
@@ -205,7 +204,7 @@ class RectObject():
         self.leftX = 0
         self.midLeftX = 0 + self.width / 3
         self.midRightX = 0 + 2 * self.width / 3
-        self.rightX = 0 + self.width       
+        self.rightX = 0 + self.width
 
     def loadImg(self, IMG):
         self.img = pygame.image.load(IMG)
@@ -226,13 +225,10 @@ class RectObject():
         if(self.lowerY <= Mat.self.baseY and self.rightX > 100):
             if(self.midX < Mat.rightX and self.midX > Mat.leftX):
                 screen.blit(self.img)
+                self.placed = 1
                 return
-            elif(self.rightX <= Mat.rightX and self.rightX > Mat.leftX):
-                if(self.midX > Mat.leftX and self.midX < Mat.rightX):
-                    screen.blit(self.img)
-                    return
-                else: return
-        elif(self.lowerY > Mat.self.baseY and self.right > 100):
+            else: return
+        elif(self.lowerY > Mat.self.baseY and self.right > 100 and self.placed == 0):
             setPos([self.pos[0],self.pos[1]-1])
             screen.blit(self.img)
             if(self.lowerY == 500):
